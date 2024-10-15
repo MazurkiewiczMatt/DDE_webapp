@@ -3,6 +3,9 @@ import streamlit as st
 st.markdown("### Recirculating Photonic Integrated Circuits for Machine Learning  \n"
             "MSc Thesis, Mateusz Mazurkiewicz, 15-10-2024")
 
+st.image("diagram_time_delay.png", caption="The circuit modelled using temporal coupled mode theory.")
+
+
 st.markdown("Cavities:")
 with st.container(border=True):
 
