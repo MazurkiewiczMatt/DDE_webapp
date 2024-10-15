@@ -21,20 +21,26 @@ with st.container(border=True):
     with col2:
         with st.container(border=True):
             st.markdown("Cavity A")
-            omega_1 = st.number_input("$\omega_1$ [Hz]", value=1.0, help="Natural frequency of the cavity.")
-            kappa_w1_ratio = st.number_input("$\kappa_{w,1}/\omega_1$", value=0.1, help="$\kappa_{w}$ is coupling with waveguide.")
-            kappa_x1_ratio = st.number_input("$\kappa_{x,1}/\omega_1$", value=0.0, help="$\kappa_{x}$ represents other cavity losses.")
+            col21, col22 = st.columns(2)
+            with col21:
+                omega_1 = st.number_input("$\omega_1$ [Hz]", value=1.0, help="Natural frequency of the cavity.")
+                kappa_w1_ratio = st.number_input("$\kappa_{w,1}/\omega_1$", value=0.1, help="$\kappa_{w}$ is coupling with waveguide.")
+            with col22:
+                kappa_x1_ratio = st.number_input("$\kappa_{x,1}/\omega_1$", value=0.0, help="$\kappa_{x}$ represents other cavity losses.")
 
     with col3:
         with st.container(border=True):
             st.markdown("Cavity B")
-            if cavities == "$\omega_1 \\neq \omega_2$":
-                omega_2 = st.number_input("$\omega_2$ [Hz]", value=1.0, help="Natural frequency of the cavity.")
-            else:
-                omega_2 = st.number_input("$\omega_2$ [Hz]", value=omega_1, disabled=True)
-            kappa_w2_ratio = st.number_input("$\kappa_{w,2}/\omega_2$", value=0.1,
-                                       help="$\kappa_{w}$ is coupling with waveguide.")
-            kappa_x2_ratio = st.number_input("$\kappa_{x,2}/\omega_2$", value=0.0,
+            col31, col32 = st.columns(2)
+            with col31:
+                if cavities == "$\omega_1 \\neq \omega_2$":
+                    omega_2 = st.number_input("$\omega_2$ [Hz]", value=1.0, help="Natural frequency of the cavity.")
+                else:
+                    omega_2 = st.number_input("$\omega_2$ [Hz]", value=omega_1, disabled=True)
+                kappa_w2_ratio = st.number_input("$\kappa_{w,2}/\omega_2$", value=0.1,
+                                           help="$\kappa_{w}$ is coupling with waveguide.")
+            with col32:
+                kappa_x2_ratio = st.number_input("$\kappa_{x,2}/\omega_2$", value=0.0,
                                        help="$\kappa_{x}$ represents other cavity losses.")
 
 
