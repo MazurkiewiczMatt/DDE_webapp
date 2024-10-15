@@ -5,6 +5,9 @@ st.markdown("### Recirculating Photonic Integrated Circuits for Machine Learning
 
 st.image("diagram_time_delay.png", caption="The circuit modelled using temporal coupled mode theory.")
 
+st.markdown("Waveguides:")
+with st.container(border=True):
+    t_delay = st.number_input("$t_{\\text{delay}}$ [s]", value=1.0)
 
 st.markdown("Cavities:")
 with st.container(border=True):
@@ -49,29 +52,3 @@ with st.container(border=True):
                 st.markdown("$\kappa_{w,2} = " + f"{kappa_w1_ratio*omega_2}" + "$ [Hz]  \n")
                 st.markdown("$\kappa_{x,2} = " + f"{kappa_x1_ratio * omega_2}" + "$ [Hz]")
 
-
-
-
-# Input parameters
-t_delay = st.number_input("t_delay (time)", value=1.0)
-
-kappa_w2 = st.number_input("kappa_w2 (frequency)", value=1.0)
-omega_driving = st.number_input("omega_driving (frequency)", value=1.0)
-kappa_x_1 = st.number_input("kappa_x_1 (frequency)", value=1.0)
-kappa_x_2 = st.number_input("kappa_x_2 (frequency)", value=1.0)
-
-# Convert and display the parameters based on unit choice
-t_delay = convert_value(t_delay, omega_1, omega_2, unit_choice)
-kappa_w1 = convert_value(kappa_w1, omega_1, omega_2, unit_choice)
-kappa_w2 = convert_value(kappa_w2, omega_1, omega_2, unit_choice)
-omega_driving = convert_value(omega_driving, omega_1, omega_2, unit_choice)
-kappa_x_1 = convert_value(kappa_x_1, omega_1, omega_2, unit_choice)
-kappa_x_2 = convert_value(kappa_x_2, omega_1, omega_2, unit_choice)
-
-# Display the results
-st.write(f"t_delay: {t_delay}")
-st.write(f"kappa_w1: {kappa_w1}")
-st.write(f"kappa_w2: {kappa_w2}")
-st.write(f"omega_driving: {omega_driving}")
-st.write(f"kappa_x_1: {kappa_x_1}")
-st.write(f"kappa_x_2: {kappa_x_2}")
