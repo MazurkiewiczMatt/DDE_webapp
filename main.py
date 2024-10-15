@@ -1,6 +1,7 @@
 import streamlit as st
 
-st.markdown("### Recirculating Photonic Integrated Circuits for Machine Learning \ MSc Thesis, Mateusz Mazurkiewicz, 15-10-2024")
+st.markdown("### Recirculating Photonic Integrated Circuits for Machine Learning  "
+            "MSc Thesis, Mateusz Mazurkiewicz, 15-10-2024")
 
 st.markdown("Cavities:")
 with st.container(border=True):
@@ -23,7 +24,7 @@ with st.container(border=True):
     with col3:
         with st.container(border=True):
             st.markdown("Cavity B")
-            if cavities == "Different":
+            if cavities == "$\omega_1 \\neq \omega_2$":
                 omega_2 = st.number_input("$\omega_2$ [Hz]", value=1.0)
             else:
                 omega_2 = st.number_input("$\omega_2$ [Hz]", value=omega_1, disabled=True)
