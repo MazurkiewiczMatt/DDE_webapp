@@ -1,17 +1,22 @@
 import streamlit as st
 
-# Inputs for omega_1 and omega_2
-col1, col2 = st.columns(2)
+col1, col2, col3 = st.columns(3)
 
 with col1:
-    omega_1 = st.number_input("$\omega_1$ [Hz]", value=1.0)
+    cavities = st.radio(
+        "The cavities are:",
+        ["Identical", "Different"]
+    )
 
 with col2:
-    omega_2 = st.number_input("omega_2 (Hz)", value=1.0)
+    omega_1 = st.number_input("$\omega_1$ [Hz]", value=1.0)
 
-# Button to set omega_2 equal to omega_1
-if st.button("Set omega_2 = omega_1"):
-    omega_2 = omega_1
+with col3:
+    if cavities == "Different":
+        omega_2 = st.number_input("$\omega_2$ [Hz]", value=1.0)
+    else:
+        omega_2 = st.number_input("$\omega_2$ [Hz]", value=omega_1)
+
 
 # Selector for units
 unit_choice = st.radio(
