@@ -6,19 +6,24 @@ with st.container(border=True):
     col1, col2, col3 = st.columns(3)
 
     with col1:
+        st.markdown("Settings:")
         cavities = st.radio(
-            "The cavities are:",
-            ["Identical", "Different"]
+            "",
+            ["$\omega_1 = \omega_2$", "$\omega_1 \neq \omega_2$"]
         )
 
     with col2:
-        omega_1 = st.number_input("$\omega_1$ [Hz]", value=1.0)
+        with st.container(border=True):
+            st.markdown("Cavity A")
+            omega_1 = st.number_input("$\omega_1$ [Hz]", value=1.0)
 
     with col3:
-        if cavities == "Different":
-            omega_2 = st.number_input("$\omega_2$ [Hz]", value=1.0)
-        else:
-            omega_2 = st.number_input("$\omega_2$ [Hz]", value=omega_1, disabled=True)
+        with st.container(border=True):
+            st.markdown("Cavity B")
+            if cavities == "Different":
+                omega_2 = st.number_input("$\omega_2$ [Hz]", value=1.0)
+            else:
+                omega_2 = st.number_input("$\omega_2$ [Hz]", value=omega_1, disabled=True)
 
 
 # Selector for units
