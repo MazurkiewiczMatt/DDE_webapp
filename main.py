@@ -15,7 +15,7 @@ with st.container(border=True):
         st.markdown("Settings:")
         cavities = st.radio(
             " ",
-            ["$\omega_1 = \omega_2$", "$\omega_1 \\neq \omega_2$", "$\omega_1 = n \\cdot \omega_2$", "$n \\cdot \omega_1 =  \omega_2$"],
+            ["$\omega_1 = \omega_2$", "$\omega_1 \\neq \omega_2$"],
             label_visibility="hidden"
         )
 
@@ -23,6 +23,8 @@ with st.container(border=True):
         with st.container(border=True):
             st.markdown("Cavity A")
             omega_1 = st.number_input("$\omega_1$ [Hz]", value=1.0)
+            kappa_w1 = st.number_input("$\kappa_{w,1}/\omega_1$", value=1.0, help="$\kappa_{w,1}$ is coupling with waveguide.")
+            kappa_x1 = st.number_input("$\kappa_{x,1}/\omega_1$", value=1.0, help="$\kappa_{x,1}$ represents other cavity losses.")
 
     with col3:
         with st.container(border=True):
@@ -33,24 +35,11 @@ with st.container(border=True):
                 omega_2 = st.number_input("$\omega_2$ [Hz]", value=omega_1, disabled=True)
 
 
-# Selector for units
-unit_choice = st.radio(
-    "Express values in:",
-    ["Multiples of 1/omega_1", "Multiples of 1/omega_2", "Absolute values"]
-)
 
-# Function to apply conversion based on unit choice
-def convert_value(value, omega_1, omega_2, unit_choice):
-    if unit_choice == "Multiples of 1/omega_1":
-        return value * omega_1
-    elif unit_choice == "Multiples of 1/omega_2":
-        return value * omega_2
-    else:
-        return value
 
 # Input parameters
 t_delay = st.number_input("t_delay (time)", value=1.0)
-kappa_w1 = st.number_input("kappa_w1 (frequency)", value=1.0)
+
 kappa_w2 = st.number_input("kappa_w2 (frequency)", value=1.0)
 omega_driving = st.number_input("omega_driving (frequency)", value=1.0)
 kappa_x_1 = st.number_input("kappa_x_1 (frequency)", value=1.0)
