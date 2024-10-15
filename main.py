@@ -10,7 +10,7 @@ with st.container(border=True):
     with col1:
         st.markdown("Settings:")
         cavities = st.radio(
-            "",
+            " ",
             ["$\omega_1 = \omega_2$", "$\omega_1 \\neq \omega_2$"],
             label_visibility="hidden"
         )
