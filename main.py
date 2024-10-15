@@ -27,6 +27,9 @@ with st.container(border=True):
                 kappa_w1_ratio = st.number_input("$\kappa_{w,1}/\omega_1$", value=0.1, help="$\kappa_{w}$ is coupling with waveguide.")
             with col22:
                 kappa_x1_ratio = st.number_input("$\kappa_{x,1}/\omega_1$", value=0.0, help="$\kappa_{x}$ represents other cavity losses.")
+                st.markdown("$\omega_{1} = " + f"{omega_1}" + "$ [Hz]  \n")
+                st.markdown("$\kappa_{w,1} = " + f"{kappa_w1_ratio*omega_1}" + "$ [Hz]  \n")
+                st.markdown("$\kappa_{x,1} = " + f"{kappa_x1_ratio * omega_1}" + "$ [Hz]")
 
     with col3:
         with st.container(border=True):
@@ -42,6 +45,9 @@ with st.container(border=True):
             with col32:
                 kappa_x2_ratio = st.number_input("$\kappa_{x,2}/\omega_2$", value=0.0,
                                        help="$\kappa_{x}$ represents other cavity losses.")
+                st.markdown("$\omega_{2} = " + f"{omega_2}" + "$ [Hz]  \n")
+                st.markdown("$\kappa_{w,2} = " + f"{kappa_w1_ratio*omega_2}" + "$ [Hz]  \n")
+                st.markdown("$\kappa_{x,2} = " + f"{kappa_x1_ratio * omega_2}" + "$ [Hz]")
 
 
 
