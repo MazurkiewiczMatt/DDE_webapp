@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.markdown("### Recirculating Photonic Integrated Circuits for Machine Learning  "
+st.markdown("### Recirculating Photonic Integrated Circuits for Machine Learning  \n"
             "MSc Thesis, Mateusz Mazurkiewicz, 15-10-2024")
 
 st.markdown("Cavities:")
