@@ -1,5 +1,7 @@
 import streamlit as st
 
+st.markdown("# Recirculating Photonic Integrated Circuits for Machine Learning \n ## MSc Thesis, Mateusz Mazurkiewicz, 15-10-2024")
+
 with st.container(border=True):
     st.markdown("Cavities:")
 
@@ -9,7 +11,7 @@ with st.container(border=True):
         st.markdown("Settings:")
         cavities = st.radio(
             "",
-            ["$\omega_1 = \omega_2$", "$\omega_1 \neq \omega_2$"]
+            ["$\omega_1 = \omega_2$", "$\omega_1 \\neq \omega_2$"]
         )
 
     with col2:
