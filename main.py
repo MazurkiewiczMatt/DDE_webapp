@@ -1,21 +1,24 @@
 import streamlit as st
 
-col1, col2, col3 = st.columns(3)
+with st.container(border=True):
+    st.markdown("Cavities:")
 
-with col1:
-    cavities = st.radio(
-        "The cavities are:",
-        ["Identical", "Different"]
-    )
+    col1, col2, col3 = st.columns(3)
 
-with col2:
-    omega_1 = st.number_input("$\omega_1$ [Hz]", value=1.0)
+    with col1:
+        cavities = st.radio(
+            "The cavities are:",
+            ["Identical", "Different"]
+        )
 
-with col3:
-    if cavities == "Different":
-        omega_2 = st.number_input("$\omega_2$ [Hz]", value=1.0)
-    else:
-        omega_2 = st.number_input("$\omega_2$ [Hz]", value=omega_1)
+    with col2:
+        omega_1 = st.number_input("$\omega_1$ [Hz]", value=1.0)
+
+    with col3:
+        if cavities == "Different":
+            omega_2 = st.number_input("$\omega_2$ [Hz]", value=1.0)
+        else:
+            omega_2 = st.number_input("$\omega_2$ [Hz]", value=omega_1, disabled=True)
 
 
 # Selector for units
