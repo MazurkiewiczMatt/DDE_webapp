@@ -1,55 +1,16 @@
 import streamlit as st
+from inputs import render_inputs
+from solver import solve_dde
+from plotter import plot_results
 
-st.markdown("### Recirculating Photonic Integrated Circuits for Machine Learning  \n"
-            "MSc Thesis, Mateusz Mazurkiewicz, 15-10-2024")
+st.title("Photonic Circuit Simulation with Temporal Coupled Mode Theory")
 
-st.image("diagram_time_delay.png", caption="The circuit modelled using temporal coupled mode theory.")
+# Render inputs and get parameters
+t_delay, omega_1, omega_2, kappa_w1_ratio, kappa_x1_ratio, kappa_w2_ratio, kappa_x2_ratio = render_inputs()
 
+# Perform the DDE solution when inputs are submitted
+if st.button("Run Simulation"):
+    tspan, A_solution = solve_dde(omega_1, kappa_w1_ratio * omega_1, kappa_x1_ratio * omega_1, t_delay)
 
-with st.expander("Simulation settings", expanded=False):
-    st.markdown("Waveguides:")
-    with st.container(border=True):
-        t_delay = st.number_input("$t_{\\text{delay}}$ [s]", value=1.0)
-
-    st.markdown("Cavities:")
-    with st.container(border=True):
-
-        cavities = st.radio(
-            " ",
-            ["$\omega_1 = \omega_2$", "$\omega_1 \\neq \omega_2$"],
-            label_visibility="hidden"
-        )
-
-        col2, col3 = st.columns([2, 2])
-
-        with col2:
-            with st.container(border=True):
-                st.markdown("Cavity A")
-                col21, col22 = st.columns(2)
-                with col21:
-                    omega_1 = st.number_input("$\omega_1$ [Hz]", value=1.0, help="Natural frequency of the cavity.")
-                    kappa_w1_ratio = st.number_input("$\kappa_{w,1}/\omega_1$", value=0.1, help="$\kappa_{w}$ is coupling with waveguide.")
-                with col22:
-                    kappa_x1_ratio = st.number_input("$\kappa_{x,1}/\omega_1$", value=0.0, help="$\kappa_{x}$ represents other cavity losses.")
-                    st.markdown("$\omega_{1} = " + f"{omega_1}" + "$ [Hz]  \n")
-                    st.markdown("$\kappa_{w,1} = " + f"{kappa_w1_ratio*omega_1}" + "$ [Hz]  \n")
-                    st.markdown("$\kappa_{x,1} = " + f"{kappa_x1_ratio * omega_1}" + "$ [Hz]")
-
-        with col3:
-            with st.container(border=True):
-                st.markdown("Cavity B")
-                col31, col32 = st.columns(2)
-                with col31:
-                    if cavities == "$\omega_1 \\neq \omega_2$":
-                        omega_2 = st.number_input("$\omega_2$ [Hz]", value=1.0, help="Natural frequency of the cavity.")
-                    else:
-                        omega_2 = st.number_input("$\omega_2$ [Hz]", value=omega_1, disabled=True)
-                    kappa_w2_ratio = st.number_input("$\kappa_{w,2}/\omega_2$", value=0.1,
-                                               help="$\kappa_{w}$ is coupling with waveguide.")
-                with col32:
-                    kappa_x2_ratio = st.number_input("$\kappa_{x,2}/\omega_2$", value=0.0,
-                                           help="$\kappa_{x}$ represents other cavity losses.")
-                    st.markdown("$\omega_{2} = " + f"{omega_2}" + "$ [Hz]  \n")
-                    st.markdown("$\kappa_{w,2} = " + f"{kappa_w1_ratio*omega_2}" + "$ [Hz]  \n")
-                    st.markdown("$\kappa_{x,2} = " + f"{kappa_x1_ratio * omega_2}" + "$ [Hz]")
-
+    # Display the results
+    st.pyplot(plot_results(tspan, A_solution, kappa_w1_ratio * omega_1))
