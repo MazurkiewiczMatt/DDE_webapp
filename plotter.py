@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import numpy as np
 
 def plot_results(tspan, A_solution, kappa_w):
     A_1 = np.abs(A_solution[:, 0])**2
