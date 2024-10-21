@@ -23,3 +23,25 @@ def system_dynamics(inputs):
 
         return np.array([dA1dt, dA2dt], dtype=np.complex128)
     return dAdt
+
+
+def calculate_output_power(tspan, A_1, A_2, inputs):
+    t_delay = inputs.t_delay
+    sqrt_kappa_w1 = np.sqrt(inputs.kappa_w1)
+    sqrt_kappa_w2 = np.sqrt(inputs.kappa_w2)
+
+    def delayed(t, values, delay):
+        delayed_time_idx = np.searchsorted(tspan, t - delay)
+        if delayed_time_idx < 0:
+            delayed_time_idx = 0
+        return values[delayed_time_idx]
+
+    output_power = np.array([
+        -F_func(t - 2 * t_delay, inputs.omega_driving)
+        + sqrt_kappa_w1 * delayed(t, A_1, 2 * t_delay)
+        + sqrt_kappa_w2 * delayed(t, A_2, t_delay)
+        - sqrt_kappa_w1 * A_1[idx]
+        for idx, t in enumerate(tspan)
+    ])
+
+    return output_power

@@ -1,3 +1,5 @@
+from email.policy import default
+
 import streamlit as st
 
 def render_inputs():
@@ -6,11 +8,9 @@ def render_inputs():
         st.markdown("Waveguides:")
         t_delay = st.number_input("$t_{\\text{delay}}$ [s]", value=1.0)
 
-        st.markdown("Cavities:")
         cavities = st.radio(
-            " ",
-            ["$\omega_1 = \omega_2$", "$\omega_1 \\neq \omega_2$"],
-            label_visibility="hidden"
+            "Cavities:",
+            ["$\omega_1 = \omega_2$", "$\omega_1 \\neq \omega_2$"]
         )
 
         col2, col3 = st.columns([2, 2])
@@ -27,4 +27,14 @@ def render_inputs():
             kappa_w2_ratio = st.number_input("$\kappa_{w,2}/\omega_2$", value=0.1)
             kappa_x2_ratio = st.number_input("$\kappa_{x,2}/\omega_2$", value=0.0)
 
-    return t_delay, omega_1, omega_2, kappa_w1_ratio, kappa_x1_ratio, kappa_w2_ratio, kappa_x2_ratio
+        source_type = st.radio("Delievered power", ["Expressed as detuning", "Expressed in absolute terms"])
+        if source_type == "Expressed as detuning":
+            detuning = st.number_input("$(\\omega_{\\text{source}} - \omega_1) / \kappa_{w,1} $", value=0.0,
+                                       help="Scaled detuning of the power delivered to the circuit relative to the first cavity.")
+            omega_driving = detuning * kappa_w1_ratio + omega_1
+        elif source_type == "Expressed in absolute terms":
+            omega_driving = st.number_input("$\\omega_{\\text{source}}$ [Hz]", value=omega_1,
+                                       help="Frequency of the power delivered to the circuit.")
+
+
+    return t_delay, omega_driving, omega_1, omega_2, kappa_w1_ratio, kappa_x1_ratio, kappa_w2_ratio, kappa_x2_ratio
