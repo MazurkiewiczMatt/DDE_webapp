@@ -70,12 +70,80 @@ def render_header():
             st.markdown("While the cavity dynamics are described by:")
 
             st.latex(r'''
-                        \frac{dA_1}{dt}(t) = (-i \omega_0 - \frac{\kappa_{x, 1}}{2} - \kappa_{w, 1}) A_1(t) + \sqrt{\kappa_{w, 1}} (s_{1+}(t) + s_{2-}(t))
+                        \frac{dA_1}{dt}(t) = (-i \omega_1 - \frac{\kappa_{x, 1}}{2} - \kappa_{w, 1}) A_1(t) + \sqrt{\kappa_{w, 1}} (s_{1+}(t) + s_{2-}(t))
                         ''')
 
             st.latex(r'''
-                        \frac{dA_2}{dt}(t) = (-i \omega_0 - \frac{\kappa_{x, 2}}{2} - \frac{\kappa_{w, 2}}{2}) A_2(t) + \sqrt{\kappa_{w, 2}} s_{3+}(t)
+                        \frac{dA_2}{dt}(t) = (-i \omega_2 - \frac{\kappa_{x, 2}}{2} - \frac{\kappa_{w, 2}}{2}) A_2(t) + \sqrt{\kappa_{w, 2}} s_{3+}(t)
                         ''')
 
         with st.expander("System dynamics of the circuit (II)", expanded=False):
-            st.markdown("Elimination by substitution")
+            st.markdown("By elimination by substitution, we obtain")
+
+            st.latex(r'''
+                        s_{1+}(t) = f(t) \qquad \text{(forcing function)}
+                        ''')
+
+            st.latex(r'''
+                        s_{2+}(t) = f(t) + \sqrt{\kappa_{w, 1}}A_1(t)
+                        ''')
+
+            st.latex(r'''
+                        s_{3+}(t) = f(t-t_{\text{delay}}) + \sqrt{\kappa_{w, 1}}A_1(t-t_{\text{delay}})
+                        ''')
+
+            st.latex(r'''
+                        s_{3-}(t) = - f(t-t_{\text{delay}}) - \sqrt{\kappa_{w, 1}}A_1(t-t_{\text{delay}}) + \sqrt{\kappa_{w, 2}}A_2(t)
+                        ''')
+
+            st.latex(r'''
+                        s_{2-}(t) = - f(t-2t_{\text{delay}}) - \sqrt{\kappa_{w, 1}}A_1(t-2t_{\text{delay}}) + \sqrt{\kappa_{w, 2}}A_2(t-t_{\text{delay}})
+                        ''')
+
+            st.latex(r'''
+                \begin{aligned}
+                        s_{1-}(t) &= - f(t-2t_{\text{delay}}) - \sqrt{\kappa_{w, 1}}A_1(t-2t_{\text{delay}}) + \sqrt{\kappa_{w, 2}}A_2(t-t_{\text{delay}}) \\
+                        &\quad + \sqrt{\kappa_{w, 1}}A_1(t)
+                \end{aligned}
+                        ''')
+
+            st.latex(r'''
+                \begin{aligned}
+                    \frac{dA_1}{dt}(t) &= (-i \omega_1 - \frac{\kappa_{x, 1}}{2} - \kappa_{w, 1}) A_1(t) + \sqrt{\kappa_{w, 1}} (f(t) - f(t-2t_{\text{delay}}) \\
+                    &\quad - \sqrt{\kappa_{w, 1}}A_1(t-2t_{\text{delay}}) + \sqrt{\kappa_{w, 2}}A_2(t-t_{\text{delay}}))
+                \end{aligned}
+                    ''')
+
+            st.latex(r'''
+                \begin{aligned}
+                    \frac{dA_2}{dt}(t) &= (-i \omega_2 - \frac{\kappa_{x, 2}}{2} - \frac{\kappa_{w, 2}}{2}) A_2(t) + \sqrt{\kappa_{w, 2}} (f(t-t_{\text{delay}}) \\
+                    &\quad + \sqrt{\kappa_{w, 1}}A_1(t-t_{\text{delay}}))
+                \end{aligned}
+                    ''')
+
+        with st.expander("Verifying the model (resonant cavities)", expanded=False):
+            st.markdown("First cavity:")
+
+            st.latex(r'''
+                        \frac{dA_1}{dt}(t) = (-i \omega_1 - \frac{\kappa_{x, 1}}{2} - \kappa_{w, 1}) A_1(t) + \sqrt{\kappa_{w, 1}} (s_{1+}(t) + s_{2-}(t))
+                        ''')
+
+            st.markdown("$K = D$: both diagonal entries of both matrices are $\sqrt{\kappa_{w, 1}}$, satisfied.")
+            st.markdown("$D^{+} D = 2 \Gamma$: $2 \sqrt{\kappa_{w, 1}}^2 = 2\kappa_{w, 1}$, satisfied.")
+            st.markdown("$CD^{*} = -D$: **TBD**.")
+
+            st.markdown("Second cavity:")
+
+            st.latex(r'''
+                        \frac{dA_2}{dt}(t) = (-i \omega_2 - \frac{\kappa_{x, 2}}{2} - \frac{\kappa_{w, 2}}{2}) A_2(t) + \sqrt{\kappa_{w, 2}} s_{3+}(t)
+                        ''')
+
+            st.markdown("$K = D$: $\sqrt{\kappa_{w, 2}}=\sqrt{\kappa_{w, 2}}$, satisfied.")
+            st.markdown("$D^{+} D = 2 \Gamma$: $\sqrt{\kappa_{w, 2}}^2 = 2\\frac{\kappa_{w, 1}}{2}$ satisfied.")
+            st.markdown("$CD^{*} = -D$: $-1 \cdot \sqrt{\kappa_{w, 2}} = - \sqrt{\kappa_{w, 2}}$, satisfied.")
+
+        #with st.expander("Verifying the model (conservation of energy)", expanded=False):
+        #    st.markdown(r"""
+        #    For any $\tau$, the following must hold: $\int_0^{\tau} |s_{1+}(t)|^2 dt \geq |A_1(\tau)|^2 + |A_2(\tau)|^2 - \int_0^{\tau} |s_{1-}(t)|^2 dt$,
+        #    or, in other words, total energy delivered to the system must be greater or equal to the sum of energies in cavities and energy that left the circuit.
+        #    """)
