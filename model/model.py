@@ -18,8 +18,8 @@ def system_dynamics(inputs):
         F_1 = F_func(t - inputs.t_delay, inputs.omega_driving)
         F_2 = F_func(t - 2 * inputs.t_delay, inputs.omega_driving)
 
-        dA1dt = (-1j * inputs.omega_1 - inputs.kappa_x1/2 - inputs.kappa_w1) * A_0[0] + np.sqrt(inputs.kappa_w1) * (F_0 - F_2 - np.sqrt(inputs.kappa_w1)*A_2[0] + np.sqrt(inputs.kappa_w2) * A_1[1])
-        dA2dt = (-1j * inputs.omega_2 - inputs.kappa_x2/2 - inputs.kappa_w2/2) * A_0[1] + np.sqrt(inputs.kappa_w2)*(F_1 + np.sqrt(inputs.kappa_w1)*A_1[0])
+        dA1dt = (-1j * inputs.omega_1 - inputs.kappa_x1/2 - inputs.kappa_w1) * A_0[0] + 1j * np.sqrt(inputs.kappa_w1) * (F_0 - F_2 - 1j * np.sqrt(inputs.kappa_w1)*A_2[0] + np.sqrt(inputs.kappa_w2) * A_1[1])
+        dA2dt = (-1j * inputs.omega_2 - inputs.kappa_x2/2 - inputs.kappa_w2/2) * A_0[1] + np.sqrt(inputs.kappa_w2)*(F_1 + 1j * np.sqrt(inputs.kappa_w1)*A_1[0])
 
         return np.array([dA1dt, dA2dt], dtype=np.complex128)
     return dAdt

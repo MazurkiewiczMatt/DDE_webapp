@@ -48,7 +48,7 @@ def render_header():
             ''')
 
             st.latex(r'''
-            s_{2+}(t) = s_{1+}(t) + \sqrt{\kappa_{w, 1}}A_1(t)
+            s_{2+}(t) = s_{1+}(t) + i \sqrt{\kappa_{w, 1}}A_1(t)
             ''')
 
             st.latex(r'''
@@ -64,13 +64,13 @@ def render_header():
             ''')
 
             st.latex(r'''
-            s_{1-}(t) = s_{2-}(t) + \sqrt{\kappa_{w, 1}}A_1(t)
+            s_{1-}(t) = s_{2-}(t) + i \sqrt{\kappa_{w, 1}}A_1(t)
             ''')
 
             st.markdown("While the cavity dynamics are described by:")
 
             st.latex(r'''
-                        \frac{dA_1}{dt}(t) = (-i \omega_1 - \frac{\kappa_{x, 1}}{2} - \kappa_{w, 1}) A_1(t) + \sqrt{\kappa_{w, 1}} (s_{1+}(t) + s_{2-}(t))
+                        \frac{dA_1}{dt}(t) = (-i \omega_1 - \frac{\kappa_{x, 1}}{2} - \kappa_{w, 1}) A_1(t) + i \sqrt{\kappa_{w, 1}} (s_{1+}(t) + s_{2-}(t))
                         ''')
 
             st.latex(r'''
@@ -85,39 +85,39 @@ def render_header():
                         ''')
 
             st.latex(r'''
-                        s_{2+}(t) = f(t) + \sqrt{\kappa_{w, 1}}A_1(t)
+                        s_{2+}(t) = f(t) + i \sqrt{\kappa_{w, 1}}A_1(t)
                         ''')
 
             st.latex(r'''
-                        s_{3+}(t) = f(t-t_{\text{delay}}) + \sqrt{\kappa_{w, 1}}A_1(t-t_{\text{delay}})
+                        s_{3+}(t) = f(t-t_{\text{delay}}) + i \sqrt{\kappa_{w, 1}}A_1(t-t_{\text{delay}})
                         ''')
 
             st.latex(r'''
-                        s_{3-}(t) = - f(t-t_{\text{delay}}) - \sqrt{\kappa_{w, 1}}A_1(t-t_{\text{delay}}) + \sqrt{\kappa_{w, 2}}A_2(t)
+                        s_{3-}(t) = - f(t-t_{\text{delay}}) - i \sqrt{\kappa_{w, 1}}A_1(t-t_{\text{delay}}) + \sqrt{\kappa_{w, 2}}A_2(t)
                         ''')
 
             st.latex(r'''
-                        s_{2-}(t) = - f(t-2t_{\text{delay}}) - \sqrt{\kappa_{w, 1}}A_1(t-2t_{\text{delay}}) + \sqrt{\kappa_{w, 2}}A_2(t-t_{\text{delay}})
+                        s_{2-}(t) = - f(t-2t_{\text{delay}}) - i \sqrt{\kappa_{w, 1}}A_1(t-2t_{\text{delay}}) + \sqrt{\kappa_{w, 2}}A_2(t-t_{\text{delay}})
                         ''')
 
             st.latex(r'''
                 \begin{aligned}
-                        s_{1-}(t) &= - f(t-2t_{\text{delay}}) - \sqrt{\kappa_{w, 1}}A_1(t-2t_{\text{delay}}) + \sqrt{\kappa_{w, 2}}A_2(t-t_{\text{delay}}) \\
-                        &\quad + \sqrt{\kappa_{w, 1}}A_1(t)
+                        s_{1-}(t) &= - f(t-2t_{\text{delay}}) - i \sqrt{\kappa_{w, 1}}A_1(t-2t_{\text{delay}}) + \sqrt{\kappa_{w, 2}}A_2(t-t_{\text{delay}}) \\
+                        &\quad + i \sqrt{\kappa_{w, 1}}A_1(t)
                 \end{aligned}
                         ''')
 
             st.latex(r'''
                 \begin{aligned}
-                    \frac{dA_1}{dt}(t) &= (-i \omega_1 - \frac{\kappa_{x, 1}}{2} - \kappa_{w, 1}) A_1(t) + \sqrt{\kappa_{w, 1}} (f(t) - f(t-2t_{\text{delay}}) \\
-                    &\quad - \sqrt{\kappa_{w, 1}}A_1(t-2t_{\text{delay}}) + \sqrt{\kappa_{w, 2}}A_2(t-t_{\text{delay}}))
+                    \frac{dA_1}{dt}(t) &= (-i \omega_1 - \frac{\kappa_{x, 1}}{2} - \kappa_{w, 1}) A_1(t) + i \sqrt{\kappa_{w, 1}} (f(t) - f(t-2t_{\text{delay}}) \\
+                    &\quad - i\sqrt{\kappa_{w, 1}}A_1(t-2t_{\text{delay}}) + \sqrt{\kappa_{w, 2}}A_2(t-t_{\text{delay}}))
                 \end{aligned}
                     ''')
 
             st.latex(r'''
                 \begin{aligned}
                     \frac{dA_2}{dt}(t) &= (-i \omega_2 - \frac{\kappa_{x, 2}}{2} - \frac{\kappa_{w, 2}}{2}) A_2(t) + \sqrt{\kappa_{w, 2}} (f(t-t_{\text{delay}}) \\
-                    &\quad + \sqrt{\kappa_{w, 1}}A_1(t-t_{\text{delay}}))
+                    &\quad + i\sqrt{\kappa_{w, 1}}A_1(t-t_{\text{delay}}))
                 \end{aligned}
                     ''')
 
@@ -128,9 +128,9 @@ def render_header():
                         \frac{dA_1}{dt}(t) = (-i \omega_1 - \frac{\kappa_{x, 1}}{2} - \kappa_{w, 1}) A_1(t) + \sqrt{\kappa_{w, 1}} (s_{1+}(t) + s_{2-}(t))
                         ''')
 
-            st.markdown("$K = D$: both diagonal entries of both matrices are $\sqrt{\kappa_{w, 1}}$, satisfied.")
-            st.markdown("$D^{+} D = 2 \Gamma$: $2 \sqrt{\kappa_{w, 1}}^2 = 2\kappa_{w, 1}$, satisfied.")
-            st.markdown("$CD^{*} = -D$: **TBD**.")
+            st.markdown("$K = D$: both diagonal entries of both matrices are $i \sqrt{\kappa_{w, 1}}$, satisfied.")
+            st.markdown("$D^{+} D = 2 \Gamma$: $2 \cdot -1 \cdot (i \sqrt{\kappa_{w, 1}})^2 = 2\kappa_{w, 1}$, satisfied.")
+            st.markdown("$CD^{*} = -D$: $- i \sqrt{\kappa_{w, 1}} = - i \sqrt{\kappa_{w, 1}}$, satisfied.")
 
             st.markdown("Second cavity:")
 
